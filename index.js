@@ -4,7 +4,10 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
 const path = require('path');
-const generatedFunctions = require('./util/generateHtml');
+const generateHtml = require('./util/generateHtml');
+const { Engineer } = require('./lib/Engineer');
+const { Manager } = require('./lib/Manager');
+const { Intern } = require('./lib/Intern');
 
 // Array of questions for manager input
 askManagerQuestions = async () => {
@@ -17,7 +20,7 @@ askManagerQuestions = async () => {
         {
             type: 'input',
             name: 'id',
-            message: 'What is you employee ID number?'
+            message: 'What is your employee ID number?'
         },
         {
             type: 'input',
@@ -30,6 +33,7 @@ askManagerQuestions = async () => {
             message: 'What is your office number?'
         }
     ]);
+    return new Manager(managerInfo.name, managerInfo.id, managerInfo.email, managerInfo.officeNumber);
 }
 
 askEngineerQuestions = async () => {
@@ -42,19 +46,20 @@ askEngineerQuestions = async () => {
         {
             type: 'input',
             name: 'id',
-            message: "What is this engineer's employee ID?"
+            message: "What is the engineer's employee ID?"
         },
         {
             type: 'input',
             name: 'email',
-            message: "What is this engineer's email address?"
+            message: "What is the engineer's email address?"
         },
         {
             type: 'input',
             name: 'github',
-            message: "What is this engineer's GitHub username?"
+            message: "What is the engineer's GitHub username?"
         }
-    ])
+    ]);
+    return new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github)
 }
 
 askInternQuestions = async () => {
@@ -67,19 +72,20 @@ askInternQuestions = async () => {
         {
             type: 'input',
             name: 'id',
-            message: "What is this intern's employee ID?"
+            message: "What is the intern's employee ID?"
         },
         {
             type: 'input',
             name: 'email',
-            message: "What is this intern's email address?"
+            message: "What is the intern's email address?"
         },
         {
             type: 'input',
-            name: 'github',
-            message: "What school is this intern from?"
+            name: 'school',
+            message: "What school is the intern from?"
         }
-    ])
+    ]);
+    return new Intern(internInfo.name, internInfo.id, internInfo.email, internInfo.school);
 }
 
 promptMenu = async () => {
@@ -90,31 +96,50 @@ promptMenu = async () => {
             message: "What would you like to do?",
             choices: ['Add an engineer', 'Add an Intern', 'Finish building my team']
         }
-    ])
+    ]);
+
+    return menu.action;
 }
 
+endProgram = async () => {
+    // Function to write HTML file
+    writeToFile = async (fileName, data) => {
+        const writeFileAsync = util.promisify(fs.writeFile);
+        //use path.join to save html to dist directory
+        await writeFileAsync(path.join(process.cwd(), '/dist/' + fileName), data);
+    };
 
-// Function to write HTML file
-writeToFile = async (fileName, data) => {
-    const writeFileAsync = util.promisify(fs.writeFile);
-    //use path.join to save html to dist directory
-    await writeFileAsync(path.join('/dist', fileName), data);
-};
+}
 
 // Function to initialize app
 init = async () => {
-    const managerInfo = await askManagerQuestions();
-    //prompt add team menu
-    //if choice = engineer, prompt engineer questions
-    //if choice = intern, prompt engineer questions
-    //if choice = finish building, exit and write file
-    const info = managerInfo + engineerInfo + internInfo;
-    const markdown = generatedFunctions(info);
+    const employeeArr = [];
+
+    const manager = await askManagerQuestions();
+
+    while (true) {
+        const nextMenuChoice = promptMenu();
+
+        if (nextMenuChoice === 'Add an engineer') {
+            const engineer = await askEngineerQuestions();
+            employeeArr.push(engineer);
+        }
+        else if (nextMenuChoice === 'Add an intern') {
+            const intern = await askInternQuestions();
+            employeeArr.push(intern);
+        }
+        else {
+            break;
+        }
+    }
+
+    const markdown = generateHtml(employeeArr, manager);
     try {
-        await writeToFile('index.html', markdown);
+        await writeToFile('team.html', markdown);
     }
     catch (err) {
-        if (err) { throw err };
+        //TODO: console.error message
+        throw err;
     }
 };
 
