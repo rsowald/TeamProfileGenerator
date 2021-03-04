@@ -2,11 +2,12 @@
 
 const generateHtml = (arr, manager) => {
 
-    const managerHtml = `<span class="text">
+    const managerHtml = `
+<span class="text">
     ${manager.name}
     <i class="fas fa-mug-hot"></i>
     <br>ID: ${manager.id}
-    <br>Email: <a href = "mailto: ${manager.email}>${manager.email}</a>
+    <br>Email: <a href="mailto: ${manager.email}">${manager.email}</a>
     <br>Office Number: ${manager.officeNumber}
 </span>`;
 

@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Intern class intern card 1`] = `
-"<div class=\\"col mb-4\\">
+"
+<div class=\\"col mb-4\\">
     <div class=\\"card h-100\\">
         <div class=\\"card-header\\">
             <h4>Intern<i class=\\"fas fa-graduation-cap\\"></i></h4>
@@ -10,12 +11,10 @@ exports[`Intern class intern card 1`] = `
         <div class=\\"card-body\\">
             <ul class=\\"list-group list-group-flush\\">
                 <li class=\\"list-group-item\\">ID: 625</li>
-                <li class=\\"list-group-item\\">Email: <a href = \\"mailto: ShreeRavi625@fakemail.com\\">getEmail() {
-    return this.email;
-  }</a></li>
+                <li class=\\"list-group-item\\">Email: <a href=\\"mailto: ShreeRavi625@fakemail.com\\">ShreeRavi625@fakemail.com</a></li>
                 <li class=\\"list-group-item\\">School: OSU</li>
             </ul>
         </div>
     </div>
-    </div>"
+</div>"
 `;
