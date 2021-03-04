@@ -5,9 +5,9 @@ const fs = require('fs');
 const util = require('util');
 const path = require('path');
 const generateHtml = require('./util/generateHtml');
-const { Engineer } = require('./lib/Engineer');
-const { Manager } = require('./lib/Manager');
-const { Intern } = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
 
 // Array of questions for manager input
 askManagerQuestions = async () => {
@@ -94,10 +94,10 @@ promptMenu = async () => {
             type: 'list',
             name: 'action',
             message: "What would you like to do?",
-            choices: ['Add an engineer', 'Add an Intern', 'Finish building my team']
+            choices: ['Add an engineer', 'Add an intern', 'Finish building my team']
         }
     ]);
-
+    console.log(menu.action);
     return menu.action;
 }
 
@@ -108,7 +108,8 @@ init = async () => {
     const manager = await askManagerQuestions();
 
     while (true) {
-        const nextMenuChoice = promptMenu();
+
+        let nextMenuChoice = await promptMenu();
 
         if (nextMenuChoice === 'Add an engineer') {
             const engineer = await askEngineerQuestions();
