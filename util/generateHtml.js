@@ -11,7 +11,7 @@ const generateHtml = (arr, manager) => {
     <br>${manager.officeNumber}
 </span>`;
 
-    const employeeHtml = arr.map(employee => employee.generateCardHtml()).join();
+    const employeeHtml = arr.map(employee => employee.getEmployeeCard()).join();
 
     return `
 <!DOCTYPE html>
