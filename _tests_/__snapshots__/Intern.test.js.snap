@@ -10,7 +10,9 @@ exports[`Intern class intern card 1`] = `
         <div class=\\"card-body\\">
             <ul class=\\"list-group list-group-flush\\">
                 <li class=\\"list-group-item\\">ID: 625</li>
-                <li class=\\"list-group-item\\">Email: ShreeRavi625@fakemail.com</li>
+                <li class=\\"list-group-item\\">Email: <a href = \\"mailto: ShreeRavi625@fakemail.com\\">getEmail() {
+    return this.email;
+  }</a></li>
                 <li class=\\"list-group-item\\">School: OSU</li>
             </ul>
         </div>
