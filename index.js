@@ -97,8 +97,14 @@ promptMenu = async () => {
             choices: ['Add an engineer', 'Add an intern', 'Finish building my team']
         }
     ]);
-    console.log(menu.action);
     return menu.action;
+}
+
+// Function to write HTML file
+writeToFile = async (fileName, data) => {
+    const writeFileAsync = util.promisify(fs.writeFile);
+    //use path.join to save html to dist directory
+    await writeFileAsync(path.join(process.cwd(), '/dist/' + fileName), data);
 }
 
 // Function to initialize app
@@ -108,7 +114,6 @@ init = async () => {
     const manager = await askManagerQuestions();
 
     while (true) {
-
         let nextMenuChoice = await promptMenu();
 
         if (nextMenuChoice === 'Add an engineer') {
@@ -125,18 +130,12 @@ init = async () => {
     }
 
     const markdown = generateHtml(employeeArr, manager);
-    // Function to write HTML file
-    const writeToFile = async (fileName, data) => {
-        const writeFileAsync = util.promisify(fs.writeFile);
-        //use path.join to save html to dist directory
-        await writeFileAsync(path.join(process.cwd(), '/dist/' + fileName), data);
-    };
 
     try {
         await writeToFile('team.html', markdown);
     }
     catch (err) {
-        //TODO: console.error message
+        console.error("There was an error writing the HTML file. Please try again.");
         throw err;
     }
 };
