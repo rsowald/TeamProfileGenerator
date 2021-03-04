@@ -1,8 +1,6 @@
 const Intern = require('../lib/Intern');
 
 describe('Intern class', () => {
-
-
     describe('constructor and getter methods', () => {
         const intern = new Intern('Shree Ravikumar', 625, 'ShreeRavi625@fakemail.com', 'OSU');
         expect(intern.getName()).toBe('Shree Ravikumar');
@@ -16,4 +14,4 @@ describe('Intern class', () => {
         const intern = new Intern('Shree Ravikumar', 625, 'ShreeRavi625@fakemail.com', 'OSU');
         expect(intern.getEmployeeCard()).toMatchSnapshot();
     });
-})
+});
