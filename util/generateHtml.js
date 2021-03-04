@@ -1,6 +1,6 @@
 
 
-export const generateHtml = (arr, manager) => {
+const generateHtml = (arr, manager) => {
 
     const managerHtml = `
 <span class="text">
@@ -51,3 +51,5 @@ export const generateHtml = (arr, manager) => {
 
 </html>`;
 }
+
+module.exports = generateHtml
