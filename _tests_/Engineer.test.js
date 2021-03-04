@@ -10,7 +10,6 @@ describe('Engineer class', () => {
         expect(engineer.getRole()).toBe('Engineer');
     });
 
-
     it('engineer card', () => {
         const engineer = new Engineer('John Doe', 458, 'doe458@fakemail.com', 'https://github.com/jdozer');
         expect(engineer.getEmployeeCard()).toMatchSnapshot();
