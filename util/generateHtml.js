@@ -2,16 +2,15 @@
 
 const generateHtml = (arr, manager) => {
 
-    const managerHtml = `
-<span class="text">
+    const managerHtml = `<span class="text">
     ${manager.name}
     <i class="fas fa-mug-hot"></i>
-    <br>${manager.id}
-    <br>${manager.email}
-    <br>${manager.officeNumber}
+    <br>ID: ${manager.id}
+    <br>Email: ${manager.email}
+    <br>Office Number: ${manager.officeNumber}
 </span>`;
 
-    const employeeHtml = arr.map(employee => employee.getEmployeeCard()).join();
+    const employeeHtml = arr.map(employee => employee.getEmployeeCard()).join("");
 
     return `
 <!DOCTYPE html>
