@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Engineer class engineer card 1`] = `
+"<div class=\\"col mb-4\\">
+    <div class=\\"card h-100\\">
+        <div class=\\"card-header\\">
+            <h4>Engineer<i class=\\"fas fa-glasses\\"></i></h4>
+            <h4>John Doe</h4>
+        </div>
+        <div class=\\"card-body\\">
+            <ul class=\\"list-group list-group-flush\\">
+                <li class=\\"list-group-item\\">ID: 458</li>
+                <li class=\\"list-group-item\\">Email: doe458@fakemail.com</li>
+                <li class=\\"list-group-item\\">GitHub: https://github.com/jdozer</li>
+            </ul>
+        </div>
+    </div>
+    </div>"
+`;
